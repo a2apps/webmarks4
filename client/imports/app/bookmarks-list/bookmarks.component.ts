@@ -1,30 +1,23 @@
-import { Component } from '@angular/core';
-
+import "reflect-metadata";
+import { Component, OnInit, NgZone } from '@angular/core';
 import template from './bookmarks.component.html';
-
+import { Bookmarks, bookmark } from '../../../../collections/bookmarks';
+import { Observable } from 'rxjs';
 @Component({
   selector: 'bookmarks-list',
   template
 })
-export class bookmarksListComponent {
-  bookmarks: Array<Object>;
-  constructor() {
-    this.bookmarks=[
-      {
-        'title': 'Webmark 1',
-        'url' : 'http://test.com',
-        'category' : 'Web Design'
-      },
-      {
-        'title': 'Webmark 2',
-        'url' : 'http://test.com',
-        'category' : 'SEO'
-      },
-      {
-        'title': 'Webmark 3',
-        'url' : 'http://test.com',
-        'category' : 'Social Networks'
+export class bookmarksListComponent implements OnInit{
+  private bookmarks: bookmark[];
+  constructor(private zone: NgZone) {
+  }
+  ngOnInit(){
+    Bookmarks.find({}).zone().subscribe({
+      next: bookmarks => {
+        console.log("Got Bookmarks: ", bookmarks);
+        this.bookmarks=bookmarks;
       }
-    ]
+    });
   }
 }
+  
