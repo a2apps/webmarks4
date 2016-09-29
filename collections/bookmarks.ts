@@ -1,6 +1,6 @@
 import { MongoObservable } from 'meteor-rxjs';
 export interface bookmark {
-    name: string;
+    title: string;
     url: string;
     category: string;
 }
