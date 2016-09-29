@@ -47,6 +47,7 @@ export class bookmarksFormComponent implements OnInit{
             url: bookmark.url,
             category: bookmark.category
           });
+          console.log(this.bookmarkForm.value);
           this.bookmarkForm.reset();
           // (<Control>this.bookmarkForm.controls['title'].updateValue(''));
           // (<Control>this.bookmarkForm.controls['url'].updateValue(''));
@@ -57,7 +58,7 @@ export class bookmarksFormComponent implements OnInit{
   ngOnInit(){
     Bookmarks.find({}).zone().subscribe({
       next: bookmarks => {
-        console.log("Got Bookmarks: ", bookmarks);
+        // console.log("Got Bookmarks: ", bookmarks);
         this.bookmarks=bookmarks;
       }
     });

@@ -1,7 +1,7 @@
 <h3>
     Add Bookmark
 </h3>
-<form [formGroup]="registerForm" #f="ngForm" (ngSubmit)="addBookmark(f.value)">
+<form [formGroup]="bookmarkForm" #f="ngForm" (ngSubmit)="addBookmark(f.value)">
     <div class="form-group">
         <label>Type</label>
         <input type="text" class="form-control" formControlName="title">
