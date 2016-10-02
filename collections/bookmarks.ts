@@ -4,4 +4,4 @@ export interface bookmark {
     url: string;
     category: string;
 }
-export const Bookmarks= new MongoObservable.Collection<bookmark>('bookmarks');
+export const Bookmarks= new MongoObservable.Collection<Bookmark>('bookmarks');
