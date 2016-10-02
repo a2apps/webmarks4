@@ -5,6 +5,7 @@ import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms'
 import { Bookmarks, bookmark } from '../../../../collections/bookmarks';
 
 import { Observable } from 'rxjs';
+import { Meteor } from 'meteor/meteor';
 @Component({
   selector: 'bookmarks-form',
   template: `
@@ -42,13 +43,19 @@ export class bookmarksFormComponent implements OnInit{
   }
   addBookmark(bookmark){
       if(this.bookmarkForm.valid){
-          Bookmarks.insert({
+        if (Meteor.userId()){
+            Bookmarks.insert({
             title: bookmark.title,
             url: bookmark.url,
-            category: bookmark.category
+            category: bookmark.category,
+            owner: Meteor.userId()
           });
           console.log(this.bookmarkForm.value);
           this.bookmarkForm.reset();
+        } else{
+          alert('Please login to add a bookmark')
+        }
+          
           // (<Control>this.bookmarkForm.controls['title'].updateValue(''));
           // (<Control>this.bookmarkForm.controls['url'].updateValue(''));
           // (<Control>this.bookmarkForm.controls['category'].updateValue(''));
